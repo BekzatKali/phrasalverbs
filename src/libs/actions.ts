@@ -1,6 +1,6 @@
 export const getPhrasalVerbs = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/phrasalverbs", {
+      const res = await fetch("/api/phrasalverbs", {
         cache: "no-store"
       });
       if (!res.ok) {
@@ -14,7 +14,7 @@ export const getPhrasalVerbs = async () => {
 
 export const getPhrasalVerbById = async (id: string) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/phrasalverbs/${id}`, {
+        const res = await fetch(`/api/phrasalverbs/${id}`, {
             cache: "no-store",
         });
         if (!res.ok) {

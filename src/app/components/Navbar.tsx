@@ -25,8 +25,8 @@ const Navbar = () => {
                 </ul>
             </nav>
             <div className='flex gap-4 items-center'>
-                <button className='hover:text-yellow-200 text-white  duration-300'>Sign In</button>
-                <button className='hover:text-yellow-200  text-white duration-300'>Sign Out</button>
+                <Link href='/login' className='hover:text-yellow-200 text-white  duration-300'>Login</Link>
+                <Link href='/logout' className='hover:text-yellow-200  text-white duration-300'>Log Out</Link>
             </div>
         </div>
     </div>

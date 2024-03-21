@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState } from 'react';
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
@@ -17,7 +18,7 @@ const PhrasalVerb = ({verb, example, id, updatePhrasalVerbs}: FormProps) => {
   const removePhrasalVerb = async () => {
     const confirmed = confirm('Are you sure?');
     if (confirmed) {
-      const res = await fetch(`http://localhost:3000/api/phrasalverbs?id=${id}`, {
+      const res = await fetch(`/api/phrasalverbs?id=${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

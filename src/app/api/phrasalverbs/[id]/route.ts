@@ -15,7 +15,7 @@ export async function PUT(request: NextRequest, {params}: {params: Params}) {
 }
 
 export async function GET(request: NextRequest, {params}: {params: Params}) {
-    const { id } = params;
+    const { id } = params; 
     await connectMongoDB();
     const phrasalVerb = await PhrasalVerb.findOne({_id: id});
     return NextResponse.json({ phrasalVerb }, {status: 200})

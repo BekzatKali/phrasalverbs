@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState } from 'react';
 import Button from './Button';
 
@@ -17,7 +18,7 @@ const EditForm = ({ verb, example, id, setEdited, updatePhrasalVerbs }: Props) =
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/api/phrasalverbs/${id}`, {
+            const response = await fetch(`/api/phrasalverbs/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -51,7 +52,7 @@ const EditForm = ({ verb, example, id, setEdited, updatePhrasalVerbs }: Props) =
                     value={newExample}
                 />
             </div>
-            <Button action="Update"/>
+            <Button buttonAction="Update" />
         </form>
     );
 }

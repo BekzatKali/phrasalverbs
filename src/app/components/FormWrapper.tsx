@@ -1,5 +1,6 @@
 'use client'
-import React, { useEffect, useState, useReducer } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Form from './Form';
 import PhrasalVerb from './PhrasalVerb';
 import ReactPaginate from 'react-paginate';

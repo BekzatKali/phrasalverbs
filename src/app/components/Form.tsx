@@ -6,7 +6,7 @@ type FormProps = {
   updatePhrasalVerbs: () => void;
 };
 
-const Form: React.FC<FormProps> = ({ updatePhrasalVerbs }) => {
+const Form = ({ updatePhrasalVerbs }: FormProps) => {
   const [verb, setVerbValue] = useState('');
   const [example, setExampleValue] = useState('');
 
@@ -19,7 +19,7 @@ const Form: React.FC<FormProps> = ({ updatePhrasalVerbs }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/phrasalverbs", {
+      const res = await fetch("/api/phrasalverbs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const Form: React.FC<FormProps> = ({ updatePhrasalVerbs }) => {
         placeholder='Write An Example'
       />
       <div className='flex justify-end mt-2'>
-        <Button action="Add" />
+        <Button buttonAction="Add" />
       </div>
     </form>
   );
