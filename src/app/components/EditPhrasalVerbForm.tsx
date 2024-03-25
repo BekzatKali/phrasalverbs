@@ -2,23 +2,27 @@
 
 import React, { useState } from 'react';
 import Button from './Button';
+import { useSession } from 'next-auth/react';
 
 type Props = {
     id: string,
     verb: string,
     example: string,
     setEdited?: React.Dispatch<React.SetStateAction<boolean>>,
-    updatePhrasalVerbs?: () => void;
+    updatePhrasalVerbs?: (email: string) => void;
 }
 
 const EditForm = ({ verb, example, id, setEdited, updatePhrasalVerbs }: Props) => {
     const [newVerb, setNewVerb] = useState(verb);
     const [newExample, setNewExample] = useState(example);
 
+    const {data: session} = useSession();
+    const userEmail = session?.user?.email
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await fetch(`/api/phrasalverbs/${id}`, {
+            const response = await fetch(`/api/phrasalVerbs/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -30,7 +34,7 @@ const EditForm = ({ verb, example, id, setEdited, updatePhrasalVerbs }: Props) =
                 throw new Error("Failed to update phrasal verb");
             }
             setEdited?.(false);
-            updatePhrasalVerbs?.();
+            updatePhrasalVerbs?.(userEmail as string);
         } catch (error) {
             console.log("Error updating phrasal verb", error);
         }

@@ -1,5 +1,6 @@
 import connectMongoDB from "@/libs/db";
-import PhrasalVerb from "@/models/model";
+import PhrasalVerb from "@/models/phrasalVerb";
+import User from "@/models/user";
 import { NextResponse, NextRequest } from "next/server";
 
 interface Params {
@@ -10,9 +11,21 @@ export async function PUT(request: NextRequest, {params}: {params: Params}) {
     const { id } = params;
     const { newVerb: verb, newExample: example } = await request.json();
     await connectMongoDB();
-    await PhrasalVerb.findByIdAndUpdate(id, {verb, example});
-    return NextResponse.json({message: "Phrasal Verb Updated"}, {status: 201})
-}
+    const user = await User.findOne({ "phrasalVerbs._id": id });
+    if (!user) {
+      return NextResponse.json({ message: "Phrasal Verb not found" }, { status: 404 });
+    }
+    const phrasalVerbIndex = user.phrasalVerbs.findIndex((phrasalVerb: any) => phrasalVerb._id.toString() === id);
+    if (phrasalVerbIndex !== -1) {
+      user.phrasalVerbs[phrasalVerbIndex].verb = verb;
+      user.phrasalVerbs[phrasalVerbIndex].example = example;
+      await user.save();
+      return NextResponse.json({ message: "Phrasal Verb Updated" }, { status: 201 });
+    } else {
+      return NextResponse.json({ message: "Phrasal Verb not found" }, { status: 404 });
+    }
+  }
+  
 
 export async function GET(request: NextRequest, {params}: {params: Params}) {
     const { id } = params; 

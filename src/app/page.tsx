@@ -1,10 +1,18 @@
-import FormWrapper from "./components/FormWrapper";
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import LoginForm from './components/LoginForm';
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return redirect('/dashboard');
+  }
   
   return (
-    <div className="py-6">
-      <FormWrapper />
+    <div>
+      <LoginForm />
     </div>
   );
 }

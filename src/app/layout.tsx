@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import { SessionProvider } from "next-auth/react"
+import { AuthProvider } from "@/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +21,14 @@ export default async function RootLayout({
 
       <html lang="en">
         <body className={inter.className}>
+        <AuthProvider>
           <Navbar />
-          <div className="max-w-[1280px] mx-auto px-4">
-            {children}
+          <div className="">
+            <div className="max-w-[1280px] mx-auto px-4">
+              {children}
+            </div>
           </div>
+        </AuthProvider>
         </body>
       </html>
   );

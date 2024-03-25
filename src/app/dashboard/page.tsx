@@ -1,11 +1,12 @@
 import React from 'react'
+import FormWrapper from '../components/FormWrapper'
 
-type Props = {}
-
-const page = (props: Props) => {
+const Dashboard = () => {
   return (
-    <div>page</div>
+    <div>
+      <FormWrapper />
+    </div>
   )
 }
 
-export default page
+export default Dashboard

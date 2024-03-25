@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Form from './Form';
 import PhrasalVerb from './PhrasalVerb';
 import ReactPaginate from 'react-paginate';
-import { getPhrasalVerbs } from '@/libs/actions';
+import { useSession } from 'next-auth/react';
 
 type PhrasalVerbType = {
   _id: string, 
@@ -15,6 +15,8 @@ type PhrasalVerbType = {
 const FormWrapper = () => {
   const [phrasalVerbs, setPhrasalVerbs] = useState<PhrasalVerbType[]>([]);
   const [itemOffset, setItemOffset] = useState(0);
+
+  const {data: session} = useSession();
   
   const itemsPerPage = 9;
   const endOffset = itemOffset + itemsPerPage;
@@ -25,19 +27,35 @@ const FormWrapper = () => {
     const newOffset = event.selected * itemsPerPage;
     setItemOffset(newOffset);
   };
+  
+  const userEmail = session?.user?.email;
+  
+  const fetchPhrasalVerbs = async (userEmail?: string) => {
+    try {
+      const res = await fetch(`/api/phrasalVerbs/?email=${userEmail}`, {
+        cache: "no-store",
+      });
 
-  const fetchPhrasalVerbs = async () => {
-    const data = await getPhrasalVerbs();
-    const { phrasalVerbs } = data;
-    setPhrasalVerbs(phrasalVerbs || []);
-  };
+      const { phrasalVerbs } = await res.json();
+
+      if (phrasalVerbs) {
+        setPhrasalVerbs(phrasalVerbs);
+        console.log('PhrasalVerbs fetched successfully')
+      }
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
-    fetchPhrasalVerbs();
-  }, []);
+    if (userEmail) {
+      fetchPhrasalVerbs(userEmail);
+    }
+  }, [userEmail]);
 
   return (
-    <div className='min-h-[85vh] flex justify-center flex-col'>
+    <div className='min-h-[80vh] flex justify-center flex-col pb-2'>
       <div className='mb-4 flex-grow'>
         <Form updatePhrasalVerbs={fetchPhrasalVerbs} />
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
