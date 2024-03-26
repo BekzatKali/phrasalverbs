@@ -17,7 +17,6 @@ const PhrasalVerb = ({verb, example, id, updatePhrasalVerbs}: FormProps) => {
   const [edited, setEdited] = useState<boolean>(false);
   const {data: session} = useSession();
   const userEmail = session?.user?.email
-  console.log('phrasalverb', id)
 
   const removePhrasalVerb = async () => {
     const res = await fetch(`/api/phrasalVerbs?id=${id}`, {

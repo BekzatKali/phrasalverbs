@@ -40,7 +40,6 @@ const FormWrapper = () => {
 
       if (phrasalVerbs) {
         setPhrasalVerbs(phrasalVerbs);
-        console.log('PhrasalVerbs fetched successfully')
       }
 
     } catch (err) {
