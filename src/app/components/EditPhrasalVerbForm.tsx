@@ -56,7 +56,14 @@ const EditForm = ({ verb, example, id, setEdited, updatePhrasalVerbs }: Props) =
                     value={newExample}
                 />
             </div>
-            <Button buttonAction="Update" />
+            <div className='flex gap-4'>
+                <div onClick={() => setEdited && setEdited((prev: boolean) => !prev)} className='w-full'> 
+                    <Button buttonAction="Cancel" />
+                </div>
+                <div className='w-full'>
+                    <Button buttonAction="Update" />
+                </div>
+            </div>
         </form>
     );
 }

@@ -13,6 +13,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     phrasalVerbs: [
         {
           phrasalVerbId: { type: Schema.Types.ObjectId, ref: "PhrasalVerb" },

@@ -32,12 +32,21 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-    await connectMongoDB();
-    const { searchParams } = new URL(request.url);
-    const email = searchParams.get('email');
-    const user = await User.findOne({ email: email }).populate('phrasalVerbs');
-    const phrasalVerbs = user?.phrasalVerbs || [];
-    return NextResponse.json({ phrasalVerbs });
+  await connectMongoDB();
+
+  const { searchParams } = new URL(request.url);
+
+  const email = searchParams.get('email');
+  
+  const user = await User.findOne({ email: email }).populate('phrasalVerbs');
+
+  if (user.isAdmin) {
+    const users = await User.find({});
+    return NextResponse.json({ users });
+  }
+
+  const phrasalVerbs = user?.phrasalVerbs || [];
+  return NextResponse.json({ phrasalVerbs });
 }
 
 
@@ -46,14 +55,12 @@ export async function DELETE(request: NextRequest) {
   await connectMongoDB();
 
   try {
-    // Find the User document that contains the phrasal verb
     const user = await User.findOne({ "phrasalVerbs._id": id });
 
     if (!user) {
       return NextResponse.json({ message: "Phrasal Verb not found" }, { status: 404 });
     }
 
-    // Remove the phrasal verb object from the User's phrasalVerbs array
     user.phrasalVerbs.pull({ _id: id });
     await user.save();
 

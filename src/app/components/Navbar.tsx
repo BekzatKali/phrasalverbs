@@ -15,12 +15,12 @@ const Navbar = () => {
                 Phrasal Verbs
             </Link>
             <div className='flex gap-4 items-center'>
-                <div className='text-white bg-blue-900 px-6 py-2 rounded-md max-sm:px-4 max-sm:py-2'>
+                <div className='text-white bg-black px-6 py-2 rounded-md max-sm:px-4 max-sm:py-2'>
                     <p className='max-sm:text-xs max-[500px]:flex flex-col'>
-                    <span className='text-orange-400'>Name: </span> <span className='text-yellow-300'>{session?.user?.name}</span>
+                    <span className='text-white'>Name: </span> <span className='text-yellow-200 font-bold'>{session?.user?.name}</span>
                     </p>
                     <p className='max-sm:text-xs max-[500px]:flex flex-col'>
-                    <span className='text-yellow-300'>Email:</span> <span className='text-orange-400'>{session?.user?.email}</span>
+                    <span className='text-yellow-200'>Email:</span> <span className='text-white font-bold'>{session?.user?.email}</span>
                     </p>
                 </div>
                 <button onClick={() => signOut({ redirect: true, callbackUrl: '/' })} className='hover:text-yellow-200 max-sm:text-xs  text-white duration-300'>Log Out</button>

@@ -45,6 +45,11 @@ const Form = ({ updatePhrasalVerbs }: FormProps) => {
     }
   };
 
+  const capitalizeFirstLetter = (text: string) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+  
+
   return (
     <form onSubmit={handleSubmit} className='ring-2 ring-green-600 flex flex-col p-4 mb-4 rounded-md'>
       <input
@@ -56,7 +61,7 @@ const Form = ({ updatePhrasalVerbs }: FormProps) => {
       />
       <input
         value={example}
-        onChange={(e) => setExampleValue(e.target.value)}
+        onChange={(e) => setExampleValue(capitalizeFirstLetter(e.target.value))}
         className='outline-none font-bold placeholder:font-bold'
         type="text"
         placeholder='Write An Example'

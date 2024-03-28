@@ -4,7 +4,7 @@ import User from "@/models/user";
 import { NextResponse, NextRequest } from "next/server";
 
 interface Params {
-    id: string;
+  id: string;
 }
 
 export async function PUT(request: NextRequest, {params}: {params: Params}) {
@@ -24,10 +24,10 @@ export async function PUT(request: NextRequest, {params}: {params: Params}) {
     } else {
       return NextResponse.json({ message: "Phrasal Verb not found" }, { status: 404 });
     }
-  }
+}
   
 
-export async function GET(request: NextRequest, {params}: {params: Params}) {
+export async function GET({params}: {params: Params}) {
     const { id } = params; 
     await connectMongoDB();
     const phrasalVerb = await PhrasalVerb.findOne({_id: id});

@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const ContactUsPage = (props: Props) => {
+const ContactUsPage = () => {
   return (
     <div>ContactUsPage</div>
   )

@@ -22,6 +22,7 @@ const PhrasalVerb = ({verb, example, id, updatePhrasalVerbs}: FormProps) => {
     const res = await fetch(`/api/phrasalVerbs?id=${id}`, {
       method: "DELETE",
     });
+    
     if (res.ok) {
       updatePhrasalVerbs(userEmail as string);
     }
@@ -54,6 +55,3 @@ const PhrasalVerb = ({verb, example, id, updatePhrasalVerbs}: FormProps) => {
 }
 
 export default PhrasalVerb;
-
-
-// from experiment branch 
