@@ -49,7 +49,6 @@ const Form = ({ updatePhrasalVerbs }: FormProps) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
   
-
   return (
     <form onSubmit={handleSubmit} className='ring-2 ring-green-600 flex flex-col p-4 mb-4 rounded-md'>
       <input

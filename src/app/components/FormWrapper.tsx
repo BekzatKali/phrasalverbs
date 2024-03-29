@@ -17,7 +17,8 @@ type UserType = {
   _id: string,
   name: string,
   email: string,
-  isAdmin: boolean
+  phrasalVerbs: [],
+  isAdmin: boolean,
 }
 
 const FormWrapper = () => {
@@ -68,10 +69,11 @@ const FormWrapper = () => {
   }, [userEmail]);
 
   const usersToDisplay = users.filter(user => !user.isAdmin);
+  console.log(usersToDisplay, 'users')
 
   return (
     <div>
-      {/* <h1>Greatness</h1> */}
+      <h1>Greatness</h1>
       {usersToDisplay && usersToDisplay.length ? (
         <div>
         <p className='mb-2'>The total numbers of users: {usersToDisplay.length}</p>
@@ -83,12 +85,11 @@ const FormWrapper = () => {
               id={user._id} 
               name={user.name} 
               email={user.email} 
-              isAdmin={user.isAdmin}
+              phrasalVerbs={user.phrasalVerbs}
               updatePhrasalVerbs={fetchPhrasalVerbs}
             />
           ))}
         </div>
-
         </div>
         ) : (
         <div className='min-h-[80vh] flex justify-center flex-col pb-2'>
@@ -126,7 +127,7 @@ const FormWrapper = () => {
         </div>
         
       )}
-      {/* <h1>Zdarova</h1> */}
+      <h1>Zdarova</h1>
     </div>
   );
 };

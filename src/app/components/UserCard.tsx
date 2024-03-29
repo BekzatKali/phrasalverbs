@@ -2,19 +2,19 @@
 
 import React from 'react'
 import { FaUserAlt } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { FaShieldAlt } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
 
 type UserCardProps = {
   id: string,
   name: string,
   email: string,
-  isAdmin: boolean,
+  phrasalVerbs: [],
   updatePhrasalVerbs: (email: string) => void;
 }
 
-const UserCard = ({id, name, email, isAdmin, updatePhrasalVerbs}: UserCardProps) => {
+const UserCard = ({id, name, email, phrasalVerbs, updatePhrasalVerbs}: UserCardProps) => {
   const {data: session} = useSession();
   const userEmail = session?.user?.email
 
@@ -39,9 +39,15 @@ const UserCard = ({id, name, email, isAdmin, updatePhrasalVerbs}: UserCardProps)
   return (
       <div className='ring-2 p-4 rounded-md'>
         <div className='mb-2 flex flex-col gap-2'>
-          <p className='flex items-center gap-2'><FaUserAlt /> <span>Name: {name}</span></p>
-          <p className='flex items-center gap-2'><MdEmail /> Email: {email}</p>
-          <p className='flex items-center gap-2'><FaShieldAlt />isAdmin: {String(isAdmin)}</p>
+          <p className='flex items-center gap-2'>
+            <FaUserAlt /> Name: <span className='font-bold'>{name}</span>
+          </p>
+          <p className='flex items-center gap-2'>
+            <MdEmail /> Email: <span className='font-bold'>{email}</span>
+          </p>
+          <p className='flex items-center gap-2'>
+            <FaBookmark /> Number of Phrasal Verbs: <span className='font-bold'>{phrasalVerbs.length}</span>
+          </p>
         </div>
         <button 
           onClick={deletingUser} 
