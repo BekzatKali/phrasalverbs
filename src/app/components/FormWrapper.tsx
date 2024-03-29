@@ -90,6 +90,7 @@ const FormWrapper = () => {
             />
           ))}
         </div>
+
         </div>
         ) : (
         <div className='min-h-[80vh] flex justify-center flex-col pb-2'>
@@ -127,7 +128,7 @@ const FormWrapper = () => {
         </div>
         
       )}
-      <h1>Zdarova</h1>
+      
     </div>
   );
 };
