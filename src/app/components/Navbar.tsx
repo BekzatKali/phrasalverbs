@@ -10,21 +10,24 @@ const Navbar = () => {
 
   return (
     <div className='bg-slate-500 mb-4'>
-        <div className='flex justify-between items-center max-w-[1280px] mx-auto px-4 py-4'>
-            <Link className='hover:text-yellow-200 text-white duration-300 font-bold text-xl max-sm:text-sm' href='/'>
+        <div className='flex justify-between gap-1 items-center max-w-[1280px] mx-auto px-4 py-4'>
+            <Link className='hover:text-yellow-200 text-white duration-300 font-bold text-xl max-sm:text-sm w-fit flex-1' href='/'>
                 Phrasal Verbs
             </Link>
-            <div className='flex gap-4 items-center'>
-                <div className='text-white bg-black px-6 py-2 rounded-md max-sm:px-4 max-sm:py-2'>
+            <div className='flex gap-1 min-[375px]:gap-2 items-center'>
+                <div className='text-white bg-black px-6 py-2 rounded-md max-sm:px-1 max-sm:py-1 max-[500px]:max-w-[180px] overflow-hidden break-words'>
                     <p className='max-sm:text-xs max-[500px]:flex flex-col'>
-                    <span className='text-white'>Name: </span> <span className='text-yellow-200 font-bold'>{session?.user?.name}</span>
+                        <span className='text-white'>Name: </span> <span className='text-yellow-200 font-bold'>{session?.user?.name}</span>
                     </p>
                     <p className='max-sm:text-xs max-[500px]:flex flex-col'>
-                    <span className='text-yellow-200'>Email:</span> <span className='text-white font-bold'>{session?.user?.email}</span>
+                        <span className='text-yellow-200'>Email:</span> <span className='text-white font-bold'>{session?.user?.email}</span>
                     </p>
                 </div>
-                <button onClick={() => signOut({ redirect: true, callbackUrl: '/' })} className='hover:text-yellow-200 max-sm:text-xs  text-white duration-300'>Log Out</button>
+                <div className='text-white flex-shrink-0'>
+                    <button onClick={() => signOut({ redirect: true, callbackUrl: '/' })} className='hover:text-yellow-200 max-sm:text-xs text-white duration-300'>Log Out</button>
+                </div>
             </div>
+            
         </div>
     </div>
   )
