@@ -34,24 +34,23 @@ const UserCard = ({id, name, email, phrasalVerbs, updatePhrasalVerbs}: UserCardP
       console.log(err)
     }
   }
- 
 
   return (
-      <div className='ring-2 p-4 rounded-md'>
-        <div className='mb-2 flex flex-col gap-2'>
+      <div className='ring-2 p-4 rounded-md max-[500px]:p-2'>
+        <div className='mb-2 flex flex-col gap-2 max-sm:text-[14px]'>
           <p className='flex items-center gap-2'>
-            <FaUserAlt /> Name: <span className='font-bold'>{name}</span>
+            <FaUserAlt className='min-w-[20px] max-[500px]:min-w-[14px]'/> Name: <span className='font-bold'>{name}</span>
           </p>
           <p className='flex items-center gap-2'>
-            <MdEmail /> Email: <span className='font-bold'>{email}</span>
+            <MdEmail className='min-w-[20px] max-[500px]:min-w-[14px]'/> Email: <span className='font-bold overflow-hidden break-words'>{email}</span>
           </p>
           <p className='flex items-center gap-2'>
-            <FaBookmark /> Number of Phrasal Verbs: <span className='font-bold'>{phrasalVerbs.length}</span>
+            <FaBookmark className='min-w-[20px] max-[500px]:min-w-[14px]'/> Number of Phrasal Verbs: <span className='font-bold'>{phrasalVerbs.length}</span>
           </p>
         </div>
         <button 
           onClick={deletingUser} 
-          className='py-2 px-6 bg-red-500 hover:bg-red-600 w-full text-white rounded-md'>
+          className='py-2 px-6 bg-red-500 hover:bg-red-600 w-full text-white rounded-md max-sm:py-1 max-sm:px-4'>
             Delete
         </button>
       </div>

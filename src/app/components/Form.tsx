@@ -50,7 +50,7 @@ const Form = ({ updatePhrasalVerbs }: FormProps) => {
   }
   
   return (
-    <form onSubmit={handleSubmit} className='ring-2 ring-green-600 flex flex-col p-4 mb-4 rounded-md'>
+    <form onSubmit={handleSubmit} className='ring-2 ring-green-600 flex flex-col p-4 mb-2 rounded-md'>
       <input
         value={verb}
         onChange={(e) => setVerbValue(e.target.value)}
