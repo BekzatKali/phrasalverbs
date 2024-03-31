@@ -73,7 +73,7 @@ const FormWrapper = () => {
   }
 
   return (
-    <div>
+    <div className='pb-4'>
       { isAdmin ? (
         <UserCardsWrapper 
           usersToDisplay={usersToDisplay}
