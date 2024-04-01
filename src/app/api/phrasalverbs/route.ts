@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
         verb: newPhrasalVerb.verb,
         example: newPhrasalVerb.example,
       });
+      
       await user.save();
   
       return NextResponse.json({ message: "Phrasal Verb Created" }, { status: 201 });

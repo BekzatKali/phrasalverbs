@@ -35,5 +35,5 @@ const UserCardsWrapper = ({usersToDisplay, updatePhrasalVerbs}: UserCardsWrapper
     </div>
   )
 }
-// sm:grid-cols-2 lg:grid-cols-3
+
 export default UserCardsWrapper

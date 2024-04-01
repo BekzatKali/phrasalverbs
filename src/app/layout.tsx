@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "@/Providers";
+import PhrasalVerbsProvider from "./context/PhrasalVerbsProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,14 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
       <AuthProvider>
-        <Navbar />
-        <div className="">
-          <div className="max-w-[1280px] mx-auto px-4">
-            {children}
+        <PhrasalVerbsProvider>
+          <Navbar />
+          <div className="">
+            <div className="max-w-[1280px] mx-auto px-4">
+              {children}
+            </div>
           </div>
-        </div>
+        </PhrasalVerbsProvider>
       </AuthProvider>
       </body>
     </html>

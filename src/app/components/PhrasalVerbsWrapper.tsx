@@ -39,7 +39,7 @@ const PhrasalVerbsWrapper = ({userEmail, phrasalVerbs, updatePhrasalVerbs}: Phra
               {phrasalVerbs && currentItems.map((item: PhrasalVerbType) => (
                 <PhrasalVerb 
                   key={item._id}
-                  id={item._id}
+                  _id={item._id}
                   verb={item.verb}
                   example={item.example}
                   updatePhrasalVerbs={updatePhrasalVerbs}
