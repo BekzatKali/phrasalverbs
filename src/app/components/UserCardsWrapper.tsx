@@ -5,6 +5,7 @@ type UserType = {
     _id: string,
     name: string,
     email: string,
+    createdAt: string,
     phrasalVerbs: [],
     isAdmin: boolean,
 }
@@ -26,6 +27,7 @@ const UserCardsWrapper = ({usersToDisplay, updatePhrasalVerbs}: UserCardsWrapper
                         id={user._id} 
                         name={user.name} 
                         email={user.email} 
+                        createdAt={user.createdAt}
                         phrasalVerbs={user.phrasalVerbs}
                         updatePhrasalVerbs={updatePhrasalVerbs}
                     />

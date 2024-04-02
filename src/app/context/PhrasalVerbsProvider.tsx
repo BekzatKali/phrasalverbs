@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 type PhrasalVerbType = {
   _id: string,
   verb: string,
-  example: string
+  example: string,
 }
 
 type PhrasalVerbsInfoContext = {
@@ -44,6 +44,7 @@ const PhrasalVerbsProvider = ({children}: {children: React.ReactNode}) => {
     console.log("favoritePhrasalVerbs:", favoritePhrasalVerbs);
 
     const isAlreadyFavorite = favoritePhrasalVerbs.some(item => item._id === _id);
+
     if (isAlreadyFavorite) {
       setFavoritePhrasalVerbs((prev) => prev.filter(item => item._id !== _id));
     } else {

@@ -15,6 +15,7 @@ type UserType = {
   _id: string,
   name: string,
   email: string,
+  createdAt: string,
   phrasalVerbs: [],
   isAdmin: boolean,
 }
@@ -32,6 +33,8 @@ const FormWrapper = () => {
   const [phrasalVerbs, setPhrasalVerbs] = useState<PhrasalVerbType[]>([]);
   const [users, setUsers] = useState<UserType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  console.log(users, 'users')
 
   const {data: session} = useSession();
   const userEmail = session?.user?.email;

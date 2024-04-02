@@ -24,7 +24,7 @@ export default async function RootLayout({
       <AuthProvider>
         <PhrasalVerbsProvider>
           <Navbar />
-          <div className="">
+          <div>
             <div className="max-w-[1280px] mx-auto px-4">
               {children}
             </div>

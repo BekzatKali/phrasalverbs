@@ -25,7 +25,6 @@ export async function PUT(request: NextRequest, {params}: {params: Params}) {
       return NextResponse.json({ message: "Phrasal Verb not found" }, { status: 404 });
     }
 }
-  
 
 export async function GET({params}: {params: Params}) {
     const { id } = params; 

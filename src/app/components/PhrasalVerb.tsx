@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { useState } from 'react';
 import { MdDelete } from "react-icons/md";
@@ -37,6 +37,7 @@ const PhrasalVerb = ({verb, example, _id, updatePhrasalVerbs}: FormProps) => {
       _id: _id,
       verb: verb,
       example: example,
+      userEmail: userEmail
     };
 
     favorites(phrasalVerb);
@@ -63,10 +64,12 @@ const PhrasalVerb = ({verb, example, _id, updatePhrasalVerbs}: FormProps) => {
               <FaHeart onClick={handleFavoriteClick} className='cursor-pointer hover:text-red-700 duration-75 w-full h-full'/>
             </div>
             <div className='w-6 h-6 flex justify-center items-center'>
-              <FaEdit className='cursor-pointer hover:text-green-700 duration-75 w-full h-full' onClick={() => setEdited(true)}  />
+              <FaEdit className='cursor-pointer hover:text-green-700 duration-75 w-full h-full' 
+              onClick={() => setEdited(true)}  />
             </div>
             <div className='w-6 h-6 flex justify-center items-center'>
-              <MdDelete className='cursor-pointer hover:text-red-800 duration-75 w-full h-full' onClick={removePhrasalVerb}  />
+              <MdDelete className='cursor-pointer hover:text-red-800 duration-75 w-full h-full' 
+              onClick={removePhrasalVerb}  />
             </div>
           </div>
         </>

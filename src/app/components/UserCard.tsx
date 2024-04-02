@@ -4,17 +4,19 @@ import React from 'react'
 import { FaUserAlt } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { useSession } from 'next-auth/react';
 
 type UserCardProps = {
   id: string,
   name: string,
   email: string,
+  createdAt: string,
   phrasalVerbs: [],
   updatePhrasalVerbs: (email: string) => void;
 }
 
-const UserCard = ({id, name, email, phrasalVerbs, updatePhrasalVerbs}: UserCardProps) => {
+const UserCard = ({id, name, email, phrasalVerbs, createdAt, updatePhrasalVerbs}: UserCardProps) => {
   const {data: session} = useSession();
   const userEmail = session?.user?.email
 
@@ -46,6 +48,9 @@ const UserCard = ({id, name, email, phrasalVerbs, updatePhrasalVerbs}: UserCardP
           </p>
           <p className='flex items-center gap-2'>
             <FaBookmark className='min-w-[20px] max-[500px]:min-w-[14px]'/> Number of Phrasal Verbs: <span className='font-bold'>{phrasalVerbs.length}</span>
+          </p>
+          <p className='flex items-center gap-2'>
+            <MdOutlineAccessTimeFilled className='min-w-[20px] max-[500px]:min-w-[14px]'/> Created at: <span className='font-bold'>{createdAt.slice(0, 10)}</span>
           </p>
         </div>
         <button 
