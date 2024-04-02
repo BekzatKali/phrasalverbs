@@ -6,6 +6,7 @@ type PhrasalVerbType = {
   _id: string,
   verb: string,
   example: string,
+  userEmail: string
 }
 
 type PhrasalVerbsInfoContext = {
@@ -22,26 +23,26 @@ export function usePhrasalVerbsInfoContext() {
 
 const PhrasalVerbsProvider = ({children}: {children: React.ReactNode}) => {
   const [favoritePhrasalVerbs, setFavoritePhrasalVerbs] = useState<PhrasalVerbType[]>(() => {
-    const storedFavorites = localStorage.getItem('favoritePhrasalVerbs');
-    return storedFavorites ? JSON.parse(storedFavorites) : [];
+    if (typeof window !== 'undefined') {
+      const storedFavorites = localStorage.getItem('favoritePhrasalVerbs');
+      return storedFavorites ? JSON.parse(storedFavorites) : [];
+    }
+    return [];
   });
 
   useEffect(() => {
     localStorage.setItem('favoritePhrasalVerbs', JSON.stringify(favoritePhrasalVerbs));
   }, [favoritePhrasalVerbs]);
 
-  console.log("favoritePhrasalVerbs:", favoritePhrasalVerbs);
-
   const favorites = (phrasalVerb: PhrasalVerbType) => {
-    const {_id, verb, example} = phrasalVerb;
+    const {_id, verb, example, userEmail} = phrasalVerb;
 
     const adding = {
       _id: _id,
       verb: verb,
-      example: example
+      example: example,
+      userEmail: userEmail as string
     }
-
-    console.log("favoritePhrasalVerbs:", favoritePhrasalVerbs);
 
     const isAlreadyFavorite = favoritePhrasalVerbs.some(item => item._id === _id);
 

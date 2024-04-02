@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState } from 'react'
 import { FaHeart } from "react-icons/fa";
 import { signOut } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
@@ -9,35 +9,18 @@ import { usePhrasalVerbsInfoContext } from '../context/PhrasalVerbsProvider'
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const {data: session} = useSession();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { data: session } = useSession();
 
-  const userEmail = session?.user?.email
+  const userEmail = session?.user?.email;
 
   const { favoritePhrasalVerbs, favorites } = usePhrasalVerbsInfoContext();
 
-  const isAnAdmin = async (userEmail: string) => {
-    try {
-        const res = await fetch(`/api/phrasalVerbs/?email=${userEmail}`, {
-            cache: 'no-store'
-        })
-        const data = await res.json();
-        if ('users' in data) {
-            setIsAdmin(true);
-        } 
-    } catch (err) {
-        console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    isAnAdmin(userEmail as string);
-  }, [userEmail])
+  const usersPhrasalVerbsDisplay = favoritePhrasalVerbs.filter((item) => item.userEmail === userEmail);
 
   return (
     <div className='bg-slate-500 mb-4'>
         <div className='flex justify-between gap-1 items-center max-w-[1420px] mx-auto px-4 py-4'>
-            <Link className='hover:text-yellow-200 text-white duration-300 font-bold text-xl max-sm:text-sm w-fit flex-1' href='/'>
+            <Link className='hover:text-yellow-200 text-white duration-300 font-bold text-xl max-sm:text-sm w-fit flex-1' href='/dashboard'>
                 Phrasal Verbs
             </Link>
             <div className='flex gap-1 min-[375px]:gap-2 items-center'>
@@ -49,6 +32,7 @@ const Navbar = () => {
                             <span className='text-yellow-200'>Email: </span> <span className='text-white font-bold'>{session?.user?.email}</span>
                         </p>
                     </div>
+
                     {userEmail && (
                         <div className='text-white flex-shrink-0'>
                             <button onClick={() => signOut({ redirect: true, callbackUrl: '/' })} className='hover:text-yellow-200 max-sm:text-xs text-white duration-300'>
@@ -57,31 +41,37 @@ const Navbar = () => {
                         </div>
                     )}
 
-                    {(!isAdmin && favoritePhrasalVerbs.length && userEmail) ? (
+                    {(usersPhrasalVerbsDisplay.length && userEmail) ? (
                         <div className='relative cursor-pointer' onClick={() => setShow(true)}>
                             <FaHeart className='w-7 h-7' />
-                            <span className='bg-red-700 text-white p-1 rounded-full absolute w-[22px] h-[22px] right-[-6px] bottom-[-10px] flex justify-center items-center'>{favoritePhrasalVerbs.length}</span>
+                            <span className='bg-red-700 text-white p-1 rounded-full absolute w-[22px] h-[22px] right-[-6px] bottom-[-10px] flex justify-center items-center'>{usersPhrasalVerbsDisplay.length}</span>
                         </div>
                     ) : null}
 
-                    {favoritePhrasalVerbs.length && show ? (
-                        <div className='fixed h-screen min-w-[300px] bg-gray-200 top-0 right-0 duration-500 p-2 z-20'>
-                            {favoritePhrasalVerbs.map((item) => (
-                                <div key={item._id}>
-                                    <h2>{item.verb}</h2>
-                                    <p>{item.example}</p>
-                                    <FaHeart onClick={() => {
-                                        favorites(item)
-                                        if (favoritePhrasalVerbs.length === 1) {
-                                            setShow(false); 
-                                        }
-                                    }}/>
+                    {usersPhrasalVerbsDisplay.length && show ? (
+                        <div className='fixed h-screen min-w-[400px] max-[500px]:min-w-[200px] max-[500px]:max-w-[240px]  bg-gray-200 top-0 right-0 duration-500 p-4 z-20 flex flex-col gap-4'>
+                            {usersPhrasalVerbsDisplay.map((item) => (
+                                <div className='ring-1 flex justify-between items-center gap-4 p-2 ring-green-600 rounded-md' 
+                                    key={item._id}>
+                                    <div>
+                                        <h2 className='font-bold'>{item.verb}</h2>
+                                        <p>{item.example}</p>
+                                    </div>
+                                    <div onClick={() => {
+                                            favorites(item);
+                                            if (usersPhrasalVerbsDisplay.length === 1) {
+                                                setShow(false); 
+                                            }
+                                        }}
+                                    >
+                                        <FaHeart className='cursor-pointer hover:text-red-700 duration-75 min-w-3 min-h-3' />
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     ) : (
                         <div className='fixed h-screen max-w-[300px] bg-gray-200 top-0 right-[-110%] duration-500'>
-                            {favoritePhrasalVerbs.map((item) => (
+                            {usersPhrasalVerbsDisplay.map((item) => (
                                 <div key={item._id}>
                                     <div>
                                         <h2>{item.verb}</h2>
@@ -91,7 +81,7 @@ const Navbar = () => {
                             ))}
                         </div>
                     )}
-                    {favoritePhrasalVerbs.length && show ? 
+                    {usersPhrasalVerbsDisplay.length && show ? 
                     (<div onClick={() => setShow(false)} className='h-screen w-screen fixed top-0 left-0 bg-black/50'></div>) 
                     : null}
             </div>

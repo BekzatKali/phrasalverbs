@@ -34,8 +34,6 @@ const FormWrapper = () => {
   const [users, setUsers] = useState<UserType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log(users, 'users')
-
   const {data: session} = useSession();
   const userEmail = session?.user?.email;
   
@@ -68,7 +66,6 @@ const FormWrapper = () => {
     if (userEmail) {
       fetchPhrasalVerbs(userEmail);
     }
-    console.log('success is coming for me')
   }, [userEmail]);
 
   if (loading) {

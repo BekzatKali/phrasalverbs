@@ -37,7 +37,7 @@ const PhrasalVerb = ({verb, example, _id, updatePhrasalVerbs}: FormProps) => {
       _id: _id,
       verb: verb,
       example: example,
-      userEmail: userEmail
+      userEmail: userEmail as string
     };
 
     favorites(phrasalVerb);
@@ -59,17 +59,17 @@ const PhrasalVerb = ({verb, example, _id, updatePhrasalVerbs}: FormProps) => {
             <h1 className='text-xl break-words font-bold capitalize'>{verb}</h1>
             <p>{example}</p>
           </div>
-          <div className='flex items-center justify-center gap-1'>
-            <div className='w-6 h-6 flex justify-center items-center'>
-              <FaHeart onClick={handleFavoriteClick} className='cursor-pointer hover:text-red-700 duration-75 w-full h-full'/>
+          <div onClick={handleFavoriteClick} className='flex items-center justify-center gap-1'>
+            <div className='min-w-6 min-h-6 flex justify-center items-center'>
+              <FaHeart  className='cursor-pointer hover:text-red-700 duration-75 min-w-6 min-h-6'/>
             </div>
-            <div className='w-6 h-6 flex justify-center items-center'>
-              <FaEdit className='cursor-pointer hover:text-green-700 duration-75 w-full h-full' 
-              onClick={() => setEdited(true)}  />
+            <div onClick={() => setEdited(true)} className='min-w-6 min-h-6 flex justify-center items-center'>
+              <FaEdit className='cursor-pointer hover:text-green-700 duration-75 min-w-6 min-h-6' 
+                />
             </div>
-            <div className='w-6 h-6 flex justify-center items-center'>
-              <MdDelete className='cursor-pointer hover:text-red-800 duration-75 w-full h-full' 
-              onClick={removePhrasalVerb}  />
+            <div onClick={removePhrasalVerb}  className='min-w-6 min-h-6 flex justify-center items-center'>
+              <MdDelete className='cursor-pointer hover:text-red-800 duration-75 min-w-6 min-h-6' 
+               />
             </div>
           </div>
         </>
